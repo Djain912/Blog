@@ -46,8 +46,13 @@ const Admin = () => {
               <Link to="/admin" className="btn btn-ghost w-full justify-start">Dashboard</Link>
             </li>
             <li>
-              <Link to="/adminposts" className="btn btn-ghost w-full justify-start">Posts</Link>
+              <Link to="/createpost" className="btn  btn-primary w-full justify-start">Createpost</Link>
             </li>
+            <li>
+              <Link to="/adminposts" className="btn btn-ghost w-full justify-start">Posts</Link>
+              
+            </li>
+            
             <li>
               <Link to="/admincontacts" className="btn btn-ghost w-full justify-start">Contacts</Link>
             </li>
