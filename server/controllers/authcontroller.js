@@ -3,6 +3,10 @@ import Post from '../models/postmodel.js';
 import Subscriber from "../models/Subscribemodel.js";
 import validator from 'validator';
 
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
+
 const contact = async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
@@ -34,7 +38,37 @@ const contact = async (req, res) => {
     return res.status(400).json({ message: err.message });
   }
 };
+///////////////////////////////////////////////////////////////
+const sendEmailNotifications = async (title, subtitle, url) => {
+  try {
+    // Create a transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: 'gmail', 
+      auth: {
+        user: process.env.USER, // Replace with your email
+        pass: process.env.PASS, // Replace with your email password
+      },
+    });
 
+    // Get all subscribers
+    const subscribers = await Subscriber.find({ subscribed: true });
+
+    // Send an email to each subscriber
+    for (let subscriber of subscribers) {
+      let mailOptions = {
+        from: '"Your Blog" <your-email@example.com>', // Sender address
+        to: subscriber.email, // List of recipients
+        subject: 'New Blog Post Published!', // Subject line
+        text: `A new blog post has been published.\n\nTitle: ${title}\nSubtitle: ${subtitle}\nRead more at: ${url}`, // Plain text body
+        html: `<p>A new blog post has been published.</p><h3>${title}</h3><h4>${subtitle}</h4><p>Read more at: <a href="${url}">${url}</a></p>`, // HTML body
+      };
+
+      await transporter.sendMail(mailOptions);
+    }
+  } catch (error) {
+    console.error('Error sending email notifications:', error);
+  }
+};
 const post = async (req, res) => {
   try {
     const { title, subtitle, description, category, image } = req.body;
@@ -44,11 +78,34 @@ const post = async (req, res) => {
     }
 
     const newPost = await Post.create({ title, subtitle, description, category, image });
+
+    // Construct the blog URL (modify this based on your actual URL structure)
+    const blogUrl = `http://localhost:5173/post/${newPost._id}`;
+
+    // Send email notifications to all subscribers
+    await sendEmailNotifications(newPost.title, newPost.subtitle, blogUrl);
+
     return res.status(200).json({ message: 'Posted Successfully' });
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
 };
+
+
+// const post = async (req, res) => {
+//   try {
+//     const { title, subtitle, description, category, image } = req.body;
+
+//     if (!title || !subtitle || !description || !category || !image) {
+//       return res.status(400).json({ message: 'All fields are required' });
+//     }
+
+//     const newPost = await Post.create({ title, subtitle, description, category, image });
+//     return res.status(200).json({ message: 'Posted Successfully' });
+//   } catch (err) {
+//     return res.status(400).json({ message: err.message });
+//   }
+// };
 
 const getposts = async (req, res) => {
   const { year, month, day, category, searchQuery } = req.query;
