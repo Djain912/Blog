@@ -12,7 +12,7 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:9000/login', {
+      const response = await fetch('https://jaintradeserver.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

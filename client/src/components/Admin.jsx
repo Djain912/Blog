@@ -13,12 +13,12 @@ const Admin = () => {
     const fetchData = async () => {
       try {
         // Fetch total posts
-        const postsResponse = await fetch('http://localhost:9000/totalposts');
+        const postsResponse = await fetch('https://jaintradeserver.onrender.com/totalposts');
         const postsData = await postsResponse.json();
         setTotalPosts(postsData.total);
 
         // Fetch total contacts
-        const contactsResponse = await fetch('http://localhost:9000/totalcontacts');
+        const contactsResponse = await fetch('https://jaintradeserver.onrender.com/totalcontacts');
         const contactsData = await contactsResponse.json();
         setTotalContacts(contactsData.total);
       } catch (error) {

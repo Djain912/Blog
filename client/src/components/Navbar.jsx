@@ -31,14 +31,14 @@ export default function Navbar() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About Me</Link>
+              <Link to="/about">About Us</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact">Contact Us</Link>
             </li>
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">TradeSavvy</Link>
+        <Link to="/" className="btn btn-ghost text-xl">JainTrades</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -46,10 +46,10 @@ export default function Navbar() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/about">About Me</Link>
+            <Link to="/about">About Us</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact">Contact Us</Link>
           </li>
         </ul>
       </div>

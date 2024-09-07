@@ -9,7 +9,7 @@ export default function PostDetail() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:9000/getposts/${postId}`);
+        const response = await fetch(`https://myblogbackend-fk9u.onrender.com/getposts/${postId}`);
         const data = await response.json();
         setPost(data);
       } catch (error) {

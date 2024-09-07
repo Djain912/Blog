@@ -14,7 +14,7 @@ const AdminPostPage = () => {
     }
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://localhost:9000/getposts');
+        const response = await fetch('https://jaintradeserver.onrender.com/getposts');
         const data = await response.json();
         setPosts(data);
         setFilteredPosts(data); // Initialize with all posts
@@ -38,7 +38,7 @@ const AdminPostPage = () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
       setIsDeleting(true);
       try {
-        const response = await fetch(`http://localhost:9000/delpost/${id}`, {
+        const response = await fetch(`https://jaintradeserver.onrender.com/delpost/${id}`, {
           method: 'DELETE',
         });
 

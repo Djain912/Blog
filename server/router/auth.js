@@ -28,5 +28,10 @@ router.route("/totalcontacts").get(totalcontacts);
 
 router.route("/login").post(login);
 
+router.route("/health").get((req, res) => {
+  res.sendStatus(200);
+})
+  
+
 
 export default router;

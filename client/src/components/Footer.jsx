@@ -14,7 +14,7 @@ export default function Footer() {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:9000/subscribe', {
+      const response = await fetch('https://jaintradeserver.onrender.com/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,20 +40,17 @@ export default function Footer() {
     <footer className="footer bg-base-200 text-base-content p-10">
       <nav>
         <h6 className="footer-title">Services</h6>
-        <a className="link link-hover">Branding</a>
-        <a className="link link-hover">Design</a>
-        <a className="link link-hover">Marketing</a>
-        <a className="link link-hover">Advertisement</a>
+        <a className="link link-hover">Trading and SIP</a>
+        
       </nav>
       <nav>
         <h6 className="footer-title">Company</h6>
         <Link to="/about" className="link link-hover">About us</Link>
-        <Link to="/contact" className="link link-hover">Contact</Link>  
+        <Link to="/contact" className="link link-hover">Contact Us</Link>  
       </nav>
       <nav>
         <h6 className="footer-title">Legal</h6>
-        <Link to="/tandc" className="link link-hover">Terms of use</Link> 
-        <a className="link link-hover">Privacy policy</a>
+        <Link to="/tandc" className="link link-hover">Disclaimer</Link> 
       </nav>
       <form onSubmit={handleSubscribe}>
         <h6 className="footer-title">Newsletter</h6>

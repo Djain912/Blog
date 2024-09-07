@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
+import Highlighter from "react-highlight-words";
 
 export default function Getpost() {
   const [posts, setPosts] = useState([]);
@@ -11,7 +12,7 @@ export default function Getpost() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:9000/getposts");
+        const response = await fetch("https://jaintradeserver.onrender.com/getposts");
         const data = await response.json();
         setPosts(data);
       } catch (error) {
@@ -43,20 +44,6 @@ export default function Getpost() {
     });
   };
 
-  const underlineText = (text, query) => {
-    if (!query) return text;
-    const parts = text.split(new RegExp(`(${query})`, "gi"));
-    return parts.map((part, index) =>
-      part.toLowerCase() === query.toLowerCase() ? (
-        <span key={index} className="underline text-primary">
-          {part}
-        </span>
-      ) : (
-        part
-      )
-    );
-  };
-
   return (
     <div>
       <div className="flex justify-center my-8">
@@ -73,9 +60,9 @@ export default function Getpost() {
             onChange={handleFilterChange}
           >
             <option value="">Filter</option>
+            <option value="Coding Problems">Coding Problems</option>
+            <option value="Tech Fact">Tech Fact</option>
             <option value="Learnings">Learnings</option>
-            <option value="Trade on Technicals">Trade on Technicals</option>
-            <option value="Trade on Fundamentals">Trade on Fundamentals</option>
           </select>
           <button className="btn btn-primary join-item">Search</button>
         </div>
@@ -91,9 +78,21 @@ export default function Getpost() {
               </figure>
               <div className="card-body break-words">
                 <h2 className="card-title font-bold text-2xl">
-                  {underlineText(post.title, searchQuery)}
+                  <Highlighter
+                    highlightClassName="highlight-green" // Custom class for green highlight
+                    searchWords={[searchQuery]}
+                    autoEscape={true}
+                    textToHighlight={post.title}
+                  />
                 </h2>
-                <p>{underlineText(post.subtitle, searchQuery)}</p>
+                <p>
+                  <Highlighter
+                    highlightClassName="highlight-green" // Custom class for green highlight
+                    searchWords={[searchQuery]}
+                    autoEscape={true}
+                    textToHighlight={post.subtitle}
+                  />
+                </p>
                 <div className="card-actions justify-end">
                   <div className="badge badge-outline">{post.category}</div>
                   <Link

@@ -9,9 +9,11 @@ const AdminContacts = () => {
     if (!localStorage.getItem('sumit-token')) {
       window.location.href = '/login';
     }
+
+
     const fetchContacts = async () => {
       try {
-        const response = await fetch('http://localhost:9000/getcontacts');
+        const response = await fetch('https://jaintradeserver.onrender.com/getcontacts');
         const data = await response.json();
         setContacts(data);
       } catch (error) {
@@ -26,7 +28,7 @@ const AdminContacts = () => {
     if (window.confirm('Are you sure you want to delete this contact?')) {
       setIsDeleting(true);
       try {
-        const response = await fetch(`http://localhost:9000/delcontact/${id}`, {
+        const response = await fetch(`https://jaintradeserver.onrender.com/delcontact/${id}`, {
           method: 'DELETE',
         });
 

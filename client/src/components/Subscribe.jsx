@@ -15,7 +15,7 @@ const SubscribePage = () => {
     setAlertType('');
 
     try {
-      const response = await fetch('http://localhost:9000/subscribe', {
+      const response = await fetch('https://jaintradeserver.onrender.com/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const SubscribePage = () => {
         setEmail('');
       } else {
         setAlertType('error');
-        setMessage('Subscription failed. Please try again.');
+        setMessage('Email already subscribed.');
       }
     } catch (error) {
       console.error('Error:', error);
